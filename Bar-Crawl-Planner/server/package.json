@@ -1,0 +1,50 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@apollo/server": "^4.0.1",
+    "@prisma/client": "^4.5.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-jwt": "^7.7.7",
+    "express-openid-connect": "^2.9.0",
+    "graphql": "^16.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^2.1.5",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.39",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "compile": "rimraf ./dist && npm run codegen && tsc",
+    "generateAndCompile": "npx prisma generate && npm run compile",
+    "compileAndStart": "npm run generateAndCompile && npm run startCompiled",
+    "startCompiled": "node ./dist/index.js",
+    "nodemonTS": "npx nodemon ./src/index.ts",
+    "testPrismaQuerries": "npx ts-node src/prisma/testPrismaQuerries.ts",
+    "postinstall": "prisma generate",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "createPrismaMigration": "npx prisma migrate dev --create-only",
+    "prismaMigrate": "npx prisma migrate dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.13.8",
+    "@graphql-codegen/typescript": "2.8.0",
+    "@graphql-codegen/typescript-resolvers": "2.7.5",
+    "@types/cors": "^2.8.12",
+    "@types/node": "^18.11.2",
+    "nodemon": "^2.0.20",
+    "prisma": "^4.5.0",
+    "ts-node": "^10.9.1"
+  },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  }
+}
